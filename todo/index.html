@@ -4,72 +4,37 @@
 	<meta charset="utf-8" />
 	<title>ToDo-Backbone</title>
 	<style type="text/css">
-	div { opacity: 0.8; background-color: #000; position: relative; z-index: 10; }
-	img { position: relative; z-index: 1; } 
+	body{ margin:0; padding: 0; }
+	.a{ height: 300px; }
+	.b{ height: 200px; background-color: #999; width: 100%; }
+	.c{ height: 1500px; }
+	.fixed { position: fixed; top: 0; }
 	</style>
 </head>
 
 <body>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
-<p data-id="000">000</p>
-<p data-id="111">111</p>
-<p data-id="222">222</p>
-<p data-id="333">333</p>
+<div class="a"></div>
+<div class="b"></div>
+<div class="c"></div>
+<!-- 加载JS文件 -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
-jQuery(document).ready(function($) {
-	// var data = $("p").map(function() {
-	// 	return $(this).attr('data-id');
-	// }).get();
-	console.time('A');
-	for(var i=0; i<10000; i++) {
-		var data = $('p').map(function() {
-			return this.getAttribute('data-id');
-		});
-	}
-	
-	console.timeEnd('A');
-	console.time('B');
-	for(var i=0; i<10000; i++) {
-		var data = $.map($('p').get(), function(item, index) {
-			return item.getAttribute('data-id');
-		});
-	}
-		
-	console.timeEnd('B');
-	console.log(data);
-	console.log($.type(data));
+$(function() {
+	var $b = $('.b');
+	// 获取要定位元素的位置
+	var navH = $b.offset().top;
+	// 克隆该节点
+	var $bb = $b.clone(true, true);
+	document.body.appendChild($bb[0]);
+	$(window).scroll(function(event) {
+		// 获取滚动条顶部的偏移
+		var scrollH = $(this).scrollTop();
+		if(scrollH > navH) {
+			$bb.addClass('fixed').show();
+		}else {
+			$bb.hide().removeClass('fixed');
+		}
+	});
 });
 </script>
 </body>
