@@ -33,17 +33,31 @@
 
 	});
 	// 单个星球视图
+	var worldTpl = '<li>Name: <%= name %> Desc: <%= desc %></li>';
 	var WorldView = Backbone.View.extend({
 		initialize: function() {
 			this.render();
 		},
+		template: _.template(worldTpl),
+		// template: _.template($('#aTpl').html()),				// 会在实例化之前执行
 		render: function() {
-			console.log('WorldView');
+			console.log(this.template);
+			// 模拟的数据
+			// 把数据绑定到模板中
+			// this.template($('#aTpl').html());
+			// var tpl = worldTpl({name: 'mackxu', desc: 'this is a desc aaaaaa'});
+			var tpl = this.template({name: 'mackxu', desc: 'this is a desc'});
+			// 添加到页面中
+			this.$el.append(tpl);
+			return this;
 		}
 	});
 
-	// 实例化视图，能自动调用render
-	var w = new WorldView();
+	$(function() {
+		// 实例化视图，能自动调用render
+		var w = new WorldView({el : '.worlds'});
+	});
+	
 
 	// 星球的模型
 	var World = Backbone.Model.extend({
