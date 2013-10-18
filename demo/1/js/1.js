@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(function() {
 	// 定义模型
 	var User = Backbone.Model.extend({
@@ -102,3 +103,33 @@ $(function() {
 
 
 	
+=======
+
+	// 制定路由规则
+	var App = Backbone.Router.extend({
+		routes: {
+			'': 'index',
+			'add': 'add',
+			'world/:id': 'show',
+			'save/:id': 'save',
+			'delete/:id': 'del'
+		},
+		index: function() {
+			console.log('index');
+		},
+		add: function() {
+			console.log('add');
+		},
+		// 单独星球介绍
+		show: function(id) {
+			console.log('show');
+		},
+		// 保存和更新星球
+		save: function(id) {
+			console.log('save');
+		},
+		del: function(id) {
+			console.log('del');
+		}
+	});
+>>>>>>> beb671a4c3dbfa05a576aee677260401e340ac05
